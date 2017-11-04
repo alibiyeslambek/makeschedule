@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="/static/serialize.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	</head>
+
+	<body>
+		<div class="course-row row" hidden style="padding-bottom: 10px">
+			<div class = "col-sm-4 ">
+
+				Course Name:
+				<input class="course-name" type = "text" placeholder="Course name"> <br>
+				Duration:
+				<select class="course-duration">
+					<option value="75">usual</option>
+					<option value="150">lab</option>
+				</select> <br>
+				Credits Number:
+				<select class="course-credits">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select> <br>
+				<button class = "delete-course-button" type = "button"> Delete Course </button>
+				<button class = "add-section-button" type = "button"> Add Section</button>
+			</div>
+			<div class = "col-sm-8 time-column">
+
+			</div>
+		</div>
+
+		<div class = "time-row row" hidden style = "padding-bottom: 10px">
+			<div class = "col-sm-6">
+				TIME1:
+				<select class="section-day1">
+					<option value="mon">MON</option>
+					<option value="tue">TUE</option>
+					<option value="wed">WED</option>
+					<option value='thu'>THU</option>
+					<option value="fri">FRI</option>
+				</select>
+				<select class="section-time1">
+					<option value="540">09:00</option>
+					<option value="630">10:30</option>
+					<option value="780">13:00</option>
+					<option value="870">14:30</option>
+					<option value="960">16:00</option>
+					<option value="1070">17:30</option>
+				</select>
+			</div>
+			<div class = "col-sm-6">
+				TIME2:
+				<select class="section-day2">
+					<option value="mon">MON</option>
+					<option value="tue">TUE</option>
+					<option value="wed">WED</option>
+					<option value='thu'>THU</option>
+					<option value="fri">FRI</option>
+				</select>
+				<select class="section-time2">
+					<option value="540">09:00</option>
+					<option value="630">10:30</option>
+					<option value="780">13:00</option>
+					<option value="870">14:30</option>
+					<option value="960">16:00</option>
+					<option value="1070">17:30</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class = "page-header">
+				<h1>Timetable generator</h1>
+			</div>
+
+			<form id = "course-list" method="POST" action=".">
+				<div style="padding-bottom: 15px">
+					Desired number of Credits:
+					<input type = "text" name = "credit-number">
+				</div>
+			</form>
+
+			<button type = "button" id = "add-course-button">Add Course</button>
+			<button type = "button" form="course-list" id = "submit-button">Submit</button>
+			<footer>Developed by Alibi Yeslambek and Nazarbek Altybay</footer>
+		</div>
+		<script src = "/static/scripts.js"></script>
+
+	</body>
+</html>
