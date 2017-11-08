@@ -4,12 +4,12 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="/static/serialize.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+		<link rel="stylesheet" type="text/css" href="styles.css">
 	</head>
 
 	<body>
@@ -29,8 +29,8 @@
 					<option value="2">2</option>
 					<option value="3">3</option>
 				</select> <br>
-				<button class = "delete-course-button" type = "button"> Delete Course </button>
-				<button class = "add-section-button" type = "button"> Add Section</button>
+				<button class = "delete-course-button btn btn-danger" type = "button"> <span class="glyphicon glyphicon-minus-sign"></span>Delete Course </button>
+				<button class = "add-section-button btn btn-info" type = "button"> <span class="glyphicon glyphicon-plus-sign"></span>Add Section</button>
 			</div>
 			<div class = "col-sm-8 time-column">
 
@@ -75,23 +75,38 @@
 				</select>
 			</div>
 		</div>
-
-		<div class="container">
-			<div class = "page-header">
-				<h1>Timetable generator</h1>
+		
+		<div class="page">
+			<div class = "jumbotron">
+				<h1 style ="color:white;">MakeSchedule</h1>
+				<p> Create the most optimal course schedule in easy to use interface </p>
 			</div>
 
-			<form id = "course-list" method="POST" action=".">
-				<div style="padding-bottom: 15px">
-					Desired number of Credits:
-					<input type = "text" name = "credit-number">
-				</div>
-			</form>
+			<div class="container-fluid">
+				<div class = "well">
+				<h2> How to use? </h2>
+				<p>Hello, dear friend. This is online course schedule generator page.
+					Firstly, enter desired number of course. Then add courses that
+					you want to take. Add courses in the order of importance. Some courses
+					may have different sections, you can add all the sections. After filling
+					everything, press 'Generate' button. </p> </div>
 
-			<button type = "button" id = "add-course-button">Add Course</button>
-			<button type = "button" form="course-list" id = "submit-button">Submit</button>
-			<footer>Developed by Alibi Yeslambek and Nazarbek Altybay</footer>
+
+				<form id = "course-list" method="POST" action=".">
+					<div style="padding-bottom: 15px">
+						Desired number of Credits:
+						<input type = "text" size = "3" name = "credit-number">
+					</div>
+				</form>
+
+				<button type = "button" id = "add-course-button" class=" btn btn-info"><span class="glyphicon glyphicon-plus-sign"></span>Add Course</button> <br>
+				<button type = "button" class="btn btn-success" form="course-list" id = "submit-button">Generate</button>
+
+			</div>
+			<div class="push"> </div>
 		</div>
+
+		<footer class="footer">Developed by Alibi Yeslambek and Nazarbek Altybay</footer>
 		<script src = "/static/scripts.js"></script>
 
 	</body>
