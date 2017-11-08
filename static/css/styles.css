@@ -21,19 +21,35 @@
 }
 
 .course-row {
+  padding-bottom: 20px;
   margin-bottom: 20px;
+  border-bottom: 1px solid grey;
 }
 
-.add-section-button, .delete-course-button {
+.add-section-button, .delete-course-button, .delete-section-button {
   margin:0;
   padding:0;
+}
+
+.form-control {
+  display: inline;
+  width: auto;
+  margin:0;
+  padding:0;
+  height: auto;
+}
+
+.time-row {
+  margin-bottom: 5px;
 }
 
 html, body {
   height: 100%;
   margin: 0;
 }
-
+table *{
+  font-weight: normal;
+}
 .page {
   min-height: 100%;
 }

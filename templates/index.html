@@ -14,41 +14,56 @@
 	</head>
 
 	<body>
-		<div class="course-row row" hidden style="padding-bottom: 10px">
-			<div class = "col-sm-4 ">
-
-				Course Name:
-				<input class="course-name" type = "text" placeholder="Course name"> <br>
-				Duration:
-				<select class="course-duration">
-					<option value="75">usual</option>
-					<option value="150">lab</option>
-				</select> <br>
-				Credits Number:
-				<select class="course-credits">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-				</select> <br>
+		<div class="course-row row" hidden >
+			<div class = "col-sm-3 ">
+				<table>
+					<tr>
+						<th><p>Course Name:</p></th>
+						<th><input class="course-name" type = "text" placeholder="Course name"> </th>
+					</tr>
+					<tr>
+						<th><p>Duration:</p></th>
+						<th><select class="course-duration form-control">
+							<option value="75">usual</option>
+							<option value="150">lab</option>
+						</select> </th>
+					</tr>
+					<tr>
+						<th><p>Credits Number:</p></th>
+						<th><select class="course-credits form-control">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select> </th>
+					</tr>
+					<tr>
+						<th><p>Must Take</p></th>
+						<th><input type = "checkbox" class = "course-must-take"> </th>
+					</tr>
+				</table>
 				<button class = "delete-course-button btn btn-danger" type = "button"> <span class="glyphicon glyphicon-minus-sign"></span>Delete Course </button>
 				<button class = "add-section-button btn btn-info" type = "button"> <span class="glyphicon glyphicon-plus-sign"></span>Add Section</button>
+
 			</div>
-			<div class = "col-sm-8 time-column">
+			<div class = "col-sm-9	 time-column">
 
 			</div>
 		</div>
 
-		<div class = "time-row row" hidden style = "padding-bottom: 10px">
-			<div class = "col-sm-6">
+		<div class = "time-row row" hidden >
+			<div class = "col-sm-3">
+				Section Code: <input type = "text" class = "section-code" size = "8">
+			</div>
+			<div class = "col-sm-3">
 				TIME1:
-				<select class="section-day1">
+				<select class="section-day1 form-control">
 					<option value="mon">MON</option>
 					<option value="tue">TUE</option>
 					<option value="wed">WED</option>
 					<option value='thu'>THU</option>
 					<option value="fri">FRI</option>
 				</select>
-				<select class="section-time1">
+				<select class="section-time1 form-control">
 					<option value="540">09:00</option>
 					<option value="630">10:30</option>
 					<option value="780">13:00</option>
@@ -57,16 +72,16 @@
 					<option value="1070">17:30</option>
 				</select>
 			</div>
-			<div class = "col-sm-6">
+			<div class = "col-sm-3">
 				TIME2:
-				<select class="section-day2">
+				<select class="section-day2 form-control">
 					<option value="mon">MON</option>
 					<option value="tue">TUE</option>
 					<option value="wed">WED</option>
 					<option value='thu'>THU</option>
 					<option value="fri">FRI</option>
 				</select>
-				<select class="section-time2">
+				<select class="section-time2 form-control">
 					<option value="540">09:00</option>
 					<option value="630">10:30</option>
 					<option value="780">13:00</option>
@@ -74,6 +89,9 @@
 					<option value="960">16:00</option>
 					<option value="1070">17:30</option>
 				</select>
+			</div>
+			<div class = "col-sm-3">
+				<button class = "delete-section-button btn btn-danger" type = "button"> <span class="glyphicon glyphicon-minus-sign"></span>Delete Section </button>
 			</div>
 		</div>
 
@@ -94,10 +112,10 @@
 
 
 				<form id = "course-list" method="POST" action=".">
-					<div style="padding-bottom: 15px">
-						Desired number of Credits:
-						<input type = "text" size = "3" name = "credit-number-min" placeholder="min">
-						<input type = "text" size = "3" name = "credit-number-max" placeholder="max">
+					<div>
+						<p style = "padding-bottom: 5px; display:inline;">Desired number of Credits:</p>
+						<input style = "display:inline" type = "text" size = "2" name = "credit-number-min" placeholder="min"> -
+						<input type = "text" size = "2" name = "credit-number-max" placeholder="max">
 					</div>
 				</form>
 

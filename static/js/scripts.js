@@ -5,12 +5,14 @@ document.getElementById('submit-button').addEventListener("click", submitForm);
 
 function dfs(v, id) {
 	if (v.classList.contains('course-name')) v.name = "course[" + id + "][name]";
+	if (v.classList.contains('course-must-take')) v.name = "course[" + id + "][must-take]";
 	if (v.classList.contains('course-duration')) v.name = "course[" + id + "][duration]";
 	if (v.classList.contains('course-credits')) v.name = "course[" + id + "][credits]";
 	if (v.classList.contains('section-day1')) v.name = "course[" + id + "][section][][day1]";
 	if (v.classList.contains('section-time1')) v.name = "course[" + id + "][section][][time1]";
 	if (v.classList.contains('section-day2')) v.name = "course[" + id + "][section][][day2]";
 	if (v.classList.contains('section-time2')) v.name = "course[" + id + "][section][][time2]";
+	if (v.classList.contains('section-code')) v.name = "course[" + id + "][section][][code]";
 	var ch = v.children;
 	for (var i = 0; i < ch.length; i++) {
 		dfs(ch[i], id);
@@ -45,6 +47,10 @@ function submitForm() {
 }
 
 function addCourse()  {
+	if(courseNumber == 10) {
+		window.alert("You can add 10 courses at most");
+		return;
+	}
 	courseNumber++;
 	var courseRow = document.getElementsByClassName('course-row')[0].cloneNode(true);
 	var courseList = document.getElementById('course-list');
@@ -69,10 +75,20 @@ function addSection() {
 	sectionRow.hidden = false;
 
 	timeColumn.append(sectionRow);
+
+	var deleteSectionButton = sectionRow.getElementsByClassName('delete-section-button')[0];
+	console.log(deleteSectionButton);
+	deleteSectionButton.addEventListener("click", deleteSection);
+
 }
 
 function deleteCourse() {
 	courseNumber--;
 	var courseRow = this.parentElement.parentElement;
 	courseRow.remove();
+}
+
+function deleteSection() {
+	var sectionRow = this.parentElement.parentElement;
+	sectionRow.remove();
 }
