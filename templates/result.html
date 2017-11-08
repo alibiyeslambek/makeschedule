@@ -12,12 +12,32 @@
 	</head>
 
 	<body>
-    Courses for you:
-    <ul>
-      {% for x in result %}
-				<li>{{x[0]['name']}}, section: {{x[1]['day1']}}({{x[1]['time1']}}) and {{x[1]['day2']}}({{x[1]['time2']}})</li>
-      {% endfor %}
-    </ul>
+		Here are some variants:
+		{% for table in tables %}
+			<table>
+				<tr>
+					<th>Time</th>
+					<th>Mon</th>
+					<th>Tues</th>
+					<th>Wed</th>
+					<th>Thurs</th>
+					<th>Fri</th>
+				</tr>
+				{% for row in table %}
+					<tr>
+						<th> {{row[0]}} </th>
+						{% for col in row[1] %}
+							{% if col %}
+								<td style="background-color: gray"> {{col}} </td>
+							{% else %}
+								<td> ... </td>
+							{% endif %}
+						{% endfor %}
+					</tr>
+				{% endfor %}
+			</table>
+			<br>
+		{% endfor %}
 
 		<footer>Developed by Alibi Yeslambek and Nazarbek Altybay</footer>
 	</body>
