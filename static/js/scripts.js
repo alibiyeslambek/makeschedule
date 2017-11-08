@@ -45,6 +45,7 @@ function submitForm() {
 }
 
 function addCourse()  {
+	courseNumber++;
 	var courseRow = document.getElementsByClassName('course-row')[0].cloneNode(true);
 	var courseList = document.getElementById('course-list');
 	var courseColumn = courseRow.firstElementChild;
@@ -71,6 +72,7 @@ function addSection() {
 }
 
 function deleteCourse() {
+	courseNumber--;
 	var courseRow = this.parentElement.parentElement;
 	courseRow.remove();
 }
