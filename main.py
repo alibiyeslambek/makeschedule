@@ -120,6 +120,7 @@ def main():
             course_list.append(course)
 
         global timetables
+        timetables = []
         generate_timetable(course_list, min_credits, max_credits)
 
         tables = []
