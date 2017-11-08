@@ -2,24 +2,31 @@ from flask import Flask, redirect, url_for, request, render_template
 
 app = Flask(__name__)
 
-def segments_intersect(l, r, l2, r2):
-    l = int(l)
-    l2 = int(l2)
-    r = l + int(r)
-    r2 = l2 + int(r2)
-    return max(l, l2) <= min(r, r2)
+class Class:
+    def __init__(self, day, start_time, duration):
+        self.day = day
+        self.start_time = int(start_time)
+        self.end_time = self.start_time + int(duration)
+    def does_intersect(self, other):
+        # checking if classes intersect
+        return self.day == other.day and max(self.start_time, other.start_time) <= min(self.end_time, other.end_time)
 
-def intersects(a, alen, b, blen):
-    flag = False
-    if a['day1'] == b['day1']:
-        flag |= segments_intersect(a['time1'], alen, b['time1'], blen)
-    if a['day1'] == b['day2']:
-        flag |= segments_intersect(a['time1'], alen, b['time2'], blen)
-    if a['day2'] == b['day1']:
-        flag |= segments_intersect(a['time2'], alen, b['time1'], blen)
-    if a['day2'] == b['day2']:
-        flag |= segments_intersect(a['time2'], alen, b['time2'], blen)
-    return flag
+class Course:
+    def __init__(self, name, duration, credits):
+        self.name = str(name)
+        self.duration = int(duration)
+        self.credits = int(credits)
+        self.sections = []
+    def add_section(self, day1, time1, day2, time2):
+        self.sections.append(Class(day1, time1, self.duration))
+        self.sections.append(Class(day2, time2, self.duration))
+    def does_intersect(self, other):
+        # checking if courses intersect
+        flag = False
+        for x in self.sections:
+            for y in other.sections:
+                flag |= x.does_intersect(y)
+        return flag
 
 global answer
 global answer_sum
@@ -45,7 +52,7 @@ def solve(course, taken = [], id = 0, sum = 0):
 @app.route("/", methods=['GET', 'POST'])
 def main():
     if request.method == 'POST':
-        content = request.get_json(silent=True)['course']
+        content = request.get_json(silent = True)['course']
         course = []
         for x,y in content.items():
             course.append(y)
