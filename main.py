@@ -1,7 +1,6 @@
 from flask import Flask, redirect, url_for, request, render_template
 
 app = Flask(__name__)
-app.run(debug=False, port=5000)
 
 class Class:
     def __init__(self, day, start_time, section):
@@ -137,3 +136,5 @@ def main():
         return render_template('result.html', tables = tables)
     else:
         return render_template('index.html')
+
+app.run(debug=False, port=5000)
