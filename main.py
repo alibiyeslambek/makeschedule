@@ -52,9 +52,7 @@ class Course:
     def add_section(self, a):
         self.section_list.append(a)
 
-timetables = []
-
-def generate_timetable(course_list, min_credits, max_credits, pointer = 0, sections_taken = [], credits_taken = 0):
+def generate_timetable(timetables, course_list, min_credits, max_credits, pointer = 0, sections_taken = [], credits_taken = 0):
     # some optimization tricks
     if credits_taken > max_credits:
         return;
@@ -67,7 +65,6 @@ def generate_timetable(course_list, min_credits, max_credits, pointer = 0, secti
         return;
 
     if pointer == len(course_list):
-        global timetables
         if min_credits <= credits_taken <= max_credits and len(timetables) < 3:
             timetables.append(list(sections_taken))
     else:
@@ -81,11 +78,11 @@ def generate_timetable(course_list, min_credits, max_credits, pointer = 0, secti
             if not flag:
                 sections_taken.append(section)
                 print(section, section.course)
-                generate_timetable(course_list, min_credits, max_credits, pointer + 1, sections_taken, credits_taken + section.course.credits)
+                generate_timetable(timetables, course_list, min_credits, max_credits, pointer + 1, sections_taken, credits_taken + section.course.credits)
                 sections_taken.pop()
         # skip
         if not course_list[pointer].required:
-            generate_timetable(course_list, min_credits, max_credits, pointer + 1, sections_taken, credits_taken)
+            generate_timetable(timetables, course_list, min_credits, max_credits, pointer + 1, sections_taken, credits_taken)
 
 @app.route("/", methods=['GET', 'POST'])
 def main():
@@ -119,9 +116,8 @@ def main():
                 course.add_section(section)
             course_list.append(course)
 
-        global timetables
         timetables = []
-        generate_timetable(course_list, min_credits, max_credits)
+        generate_timetable(timetables, course_list, min_credits, max_credits)
 
         tables = []
         for current in timetables:

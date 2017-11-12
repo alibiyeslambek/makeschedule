@@ -37,9 +37,8 @@ function submitForm() {
 			console.log(xhr.responseText);
     	console.log("guzel");
 
-			var newDoc = document.open("text/html", "replace");
-			newDoc.write(xhr.responseText);
-			newDoc.close();
+			var newWindow = window.open();
+			newWindow.document.write(xhr.responseText);
 		}
 	};
 	xhr.send(data);
