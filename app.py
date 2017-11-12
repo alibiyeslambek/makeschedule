@@ -77,11 +77,12 @@ def generate_timetable(timetables, course_list, min_credits, max_credits, pointe
                     break
             if not flag:
                 sections_taken.append(section)
-                print(section, section.course)
+                print(section)
                 generate_timetable(timetables, course_list, min_credits, max_credits, pointer + 1, sections_taken, credits_taken + section.course.credits)
                 sections_taken.pop()
         # skip
         if not course_list[pointer].required:
+            #print("take ", course_list[pointer])
             generate_timetable(timetables, course_list, min_credits, max_credits, pointer + 1, sections_taken, credits_taken)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -114,6 +115,12 @@ def main():
                 section.add_class(Class(sd['day1'], sd['time1'], section))
                 section.add_class(Class(sd['day2'], sd['time2'], section))
                 course.add_section(section)
+            print(str(course))
+            for s in course.section_list:
+                print("->", s)
+                for c in s.class_list:
+                    print("-->",c.day)
+
             course_list.append(course)
 
         timetables = []
@@ -127,8 +134,8 @@ def main():
                 table.append([firstColumn[i], [None, None, None, None, None]])
 
             for sc in current:
-                for cl in section.class_list:
-                    print(cl, cl.get_time_row(), cl.get_day_row())
+                for cl in sc.class_list:
+                    #print(str(sc), cl.day, cl.get_time_row(), cl.get_day_row())
                     table[cl.get_time_row()][1][cl.get_day_row()] = sc.code
 
             tables.append(table)
