@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, request, render_template
 
 app = Flask(__name__)
+app.run(debug=False, port=5000)
 
 class Class:
     def __init__(self, day, start_time, section):
