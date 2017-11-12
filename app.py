@@ -137,5 +137,6 @@ def main():
     else:
         return render_template('index.html')
 
-app.run()
+if __name__ == '__main__':
+    app.run()
 #app.run(debug=False, port=8000)
