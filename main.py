@@ -137,4 +137,5 @@ def main():
     else:
         return render_template('index.html')
 
-app.run(debug=False, port=8000)
+app.run()
+#app.run(debug=False, port=8000)
