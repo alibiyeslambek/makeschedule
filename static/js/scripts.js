@@ -26,6 +26,9 @@ function submitForm() {
 		dfs(courseRow[i], i - 1);
 	}
 
+	var status = document.getElementById('status');
+	status.innerHTML = "Please wait...";
+
 	var form = $('#course-form');
 	var data = JSON.stringify($('#course-form').serializeJSON());
 
@@ -35,11 +38,11 @@ function submitForm() {
 	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-			//console.log(xhr.responseText);
-    	//console.log("guzel");
-
-			var newWindow = window.open('_blank');
-			newWindow.document.write(xhr.responseText);
+			console.log(xhr.responseText.toString());
+			status.innerHTML = "<font color='green'>Success!</font><br>";
+			status.innerHTML += "<a target='_blank' href='/show?id=" + xhr.responseText.toString() + "'>Open table a new tab</a>";
+		} else {
+			status.innerHTML = "<font color='red'>Some error occured</font>";
 		}
 	};
 	xhr.send(data);
