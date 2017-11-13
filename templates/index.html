@@ -112,11 +112,14 @@
 					everything, press 'Generate' button. </p> </div>
 
 
-				<form id = "course-list" method="POST" action=".">
+				<form id = "course-form" method="POST" action=".">
 					<div>
 						<p style = "padding-bottom: 5px; display:inline;">Desired number of Credits:</p>
-						<input style = "display:inline" type = "text" size = "2" name = "credit-number-min" placeholder="min"> -
-						<input type = "text" size = "2" name = "credit-number-max" placeholder="max">
+						<input type="number" size = "2" name = "credit-number-min" placeholder="min"> -
+						<input type="number" size = "2" name = "credit-number-max" placeholder="max">
+					</div>
+					<div id="course-list">
+
 					</div>
 				</form>
 

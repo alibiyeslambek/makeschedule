@@ -1,4 +1,5 @@
 var courseNumber = 0;
+var sectionsCount = 0;
 
 document.getElementById('add-course-button').addEventListener("click", addCourse);
 document.getElementById('submit-button').addEventListener("click", submitForm);
@@ -25,8 +26,8 @@ function submitForm() {
 		dfs(courseRow[i], i - 1);
 	}
 
-	var form = $('#course-list');
-	var data = JSON.stringify($('#course-list').serializeJSON());
+	var form = $('#course-form');
+	var data = JSON.stringify($('#course-form').serializeJSON());
 
 	var xhr = new XMLHttpRequest();
 	var url = ".";
@@ -34,10 +35,10 @@ function submitForm() {
 	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-			console.log(xhr.responseText);
-    	console.log("guzel");
+			//console.log(xhr.responseText);
+    	//console.log("guzel");
 
-			var newWindow = window.open();
+			var newWindow = window.open('_blank');
 			newWindow.document.write(xhr.responseText);
 		}
 	};
@@ -67,8 +68,15 @@ function addCourse()  {
 }
 
 function addSection() {
+	if (sectionsCount >= 40) {
+			window.alert("No more than 40 sections allowed!");
+			return;
+	}
+
 	var courseRow = this.parentElement.parentElement;
 	var timeColumn = courseRow.getElementsByClassName('time-column')[0];
+
+	sectionsCount++;
 
 	var sectionRow = document.getElementsByClassName('time-row')[0].cloneNode(true);
 	sectionRow.hidden = false;
@@ -76,18 +84,23 @@ function addSection() {
 	timeColumn.append(sectionRow);
 
 	var deleteSectionButton = sectionRow.getElementsByClassName('delete-section-button')[0];
-	console.log(deleteSectionButton);
 	deleteSectionButton.addEventListener("click", deleteSection);
 
+	console.log(sectionsCount);
 }
 
 function deleteCourse() {
 	courseNumber--;
 	var courseRow = this.parentElement.parentElement;
+	var timeColumn = courseRow.getElementsByClassName('time-column')[0];
+	sectionsCount -= timeColumn.childElementCount;
 	courseRow.remove();
+
+	console.log(sectionsCount);
 }
 
 function deleteSection() {
+	sectionsCount--;
 	var sectionRow = this.parentElement.parentElement;
 	sectionRow.remove();
 }
