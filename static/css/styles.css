@@ -10,7 +10,6 @@
 .container-fluid {
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: -50px;
 }
 
 #submit-button {
@@ -45,15 +44,42 @@
 html, body {
   height: 100%;
   margin: 0;
-}
-table *{
-  font-weight: normal;
-}
-.page {
-  min-height: 100%;
+  display: block;
 }
 
-.footer, .push {
-  margin: 15px;
+.page {
+  min-height: 100%;
+  margin-bottom: -50px;
+}
+
+footer, .push {
+  padding: 15px;
   height: 50px;
+}
+
+.table-schedule {
+  width: 70%;
+  margin-bottom: 40px;
+}
+
+.table-schedule * td, .table-schedule * th {
+  border: 1px solid black;
+  border-opacity: 0.7;
+}
+
+#page-result * {
+  margin: default auto;
+  text-align: center;
+}
+
+#page-result * th {
+  padding: 20px;
+}
+
+.info-table * p {
+  font-size: 14px;
+}
+
+.alert {
+  margin-top:20px;
 }

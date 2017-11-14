@@ -27,7 +27,9 @@ function submitForm() {
 	}
 
 	var status = document.getElementById('status');
-	status.innerHTML = "Please wait...";
+	var button = document.getElementById('submit-button');
+	button.innerHTML = "Please wait...";
+	button.disabled = true;
 
 	var form = $('#course-form');
 	var data = JSON.stringify($('#course-form').serializeJSON());
@@ -38,12 +40,12 @@ function submitForm() {
 	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-			console.log(xhr.responseText.toString());
-			status.innerHTML = "<font color='green'>Success!</font><br>";
-			status.innerHTML += "<a target='_blank' href='/show?id=" + xhr.responseText.toString() + "'>Open table a new tab</a>";
+			status.innerHTML = "<div class='alert alert-success'><strong>Success! </strong>  <a target='_blank' href='/show?id=" + xhr.responseText.toString() + "'>Click</a> to see the schedule</div>";
 		} else {
-			status.innerHTML = "<font color='red'>Some error occured</font>";
+			status.innerHTML = '<div class="alert alert-danger"> <strong> Check your input!</strong></div>';
 		}
+		button.disabled = false;
+		button.innerHTML = "Generate";
 	};
 	xhr.send(data);
 	return false;
@@ -66,17 +68,18 @@ function addCourse()  {
 	var deleteButton = courseColumn.children[len-2];
 	var addSectionButton = courseColumn.children[len-1];
 
-	addSectionButton.addEventListener('click', addSection);
+	addSection(courseRow);
+	addSectionButton.addEventListener('click', function() {addSection(courseRow)});
 	deleteButton.addEventListener("click", deleteCourse);
 }
 
-function addSection() {
+function addSection(courseRow) {
 	if (sectionsCount >= 40) {
 			window.alert("No more than 40 sections allowed!");
 			return;
 	}
 
-	var courseRow = this.parentElement.parentElement;
+	//var courseRow = this.parentElement.parentElement;
 	var timeColumn = courseRow.getElementsByClassName('time-column')[0];
 
 	sectionsCount++;
@@ -89,7 +92,6 @@ function addSection() {
 	var deleteSectionButton = sectionRow.getElementsByClassName('delete-section-button')[0];
 	deleteSectionButton.addEventListener("click", deleteSection);
 
-	console.log(sectionsCount);
 }
 
 function deleteCourse() {
@@ -99,7 +101,6 @@ function deleteCourse() {
 	sectionsCount -= timeColumn.childElementCount;
 	courseRow.remove();
 
-	console.log(sectionsCount);
 }
 
 function deleteSection() {

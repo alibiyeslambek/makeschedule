@@ -8,38 +8,44 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="/static/css/styles.css">
 
 	</head>
 
 	<body>
-		Here are some variants:
-		{% for table in tables %}
-			<table class="table-striped">
-				<tr>
-					<th>Time</th>
-					<th>Mon</th>
-					<th>Tues</th>
-					<th>Wed</th>
-					<th>Thurs</th>
-					<th>Fri</th>
-				</tr>
-				{% for row in table %}
+		<div class = "page container-fluid" id = "page-result">
+			<h1 align = "center">Here are some variants</h1>
+			{% for table in tables %}
+				<table class="table-striped table-schedule" align = "center">
 					<tr>
-						<th> {{row[0]}} </th>
-						{% for col in row[1] %}
-							{% if col %}
-								<td style="background-color: gray"> {{col}} </td>
-							{% else %}
-								<td> ... </td>
-							{% endif %}
-						{% endfor %}
+						<th>Time</th>
+						<th>Mon</th>
+						<th>Tues</th>
+						<th>Wed</th>
+						<th>Thurs</th>
+						<th>Fri</th>
 					</tr>
-				{% endfor %}
-			</table>
-			<br>
-		{% endfor %}
-
-		<footer>Developed by Alibi Yeslambek and Nazarbek Altybay</footer>
+					{% for row in table %}
+						<tr>
+							<th> {{row[0]}} </th>
+							{% for col in row[1] %}
+								{% if col %}
+									<td> {{col}} </td>
+								{% else %}
+									<td>  </td>
+								{% endif %}
+							{% endfor %}
+						</tr>
+					{% endfor %}
+				</table>
+				<br>
+			{% endfor %}
+		</div>
+		<footer>
+			<p> Developed by Alibi Yeslambek and Nazarbek Altybay </p>
+		</footer>
 	</body>
+
 </html>
