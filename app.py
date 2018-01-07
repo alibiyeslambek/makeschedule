@@ -20,6 +20,7 @@ class Cell(db.Model):
     row = db.Column(db.Integer)
     col = db.Column(db.Integer)
     code = db.Column(db.String(10))
+    name = db.Column(db.String(50))
     table_id = db.Column(db.Integer, db.ForeignKey('table.id'))
     def __repr__(self):
         return ('<Cell %d, %d>' % self.row, self.col)
@@ -32,6 +33,9 @@ def show():
     tables = []
     if (len(ids) > 10):
         return;
+
+    #bg_colors = ["AliceBlue", "AntiqueWhite", "Aquamarine", "DarkKhaki", "LightGoldenRodYellow", "LightPink", "Orange"]
+    #ptr = 0
     for id in ids:
         table = []
         firstColumn = ['09:00-10:15', '10:30-11:45', '13:00-14:15', '14:30-15:45', '16:00-17:15', '17:30-18:45']
@@ -39,7 +43,7 @@ def show():
             table.append([firstColumn[i], [None, None, None, None, None]])
 
         for cell in Table.query.get(id).cells:
-            table[cell.row][1][cell.col] = cell.code
+            table[cell.row][1][cell.col] = cell.name + "(" + cell.code + ")"
 
         tables.append(table)
     return render_template('result.html', tables=tables)
@@ -86,7 +90,7 @@ def main():
             dbtable = Table()
             for sc in current:
                 for cl in sc.class_list:
-                    dbtable.cells.append(Cell(row = cl.get_time_row(), col = cl.get_day_row(), code = cl.section.code))
+                    dbtable.cells.append(Cell(row = cl.get_time_row(), col = cl.get_day_row(), code = cl.section.code, name = cl.section.course.name))
 
             db.session.add(dbtable)
             db.session.commit()
